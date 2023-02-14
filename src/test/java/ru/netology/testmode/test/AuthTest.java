@@ -1,9 +1,11 @@
 package ru.netology.testmode.test;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.testmode.data.DataGenerator.Registration.getRegisteredUser;
 import static ru.netology.testmode.data.DataGenerator.Registration.getUser;
@@ -21,6 +23,10 @@ class AuthTest {
     @DisplayName("Should successfully login with active registered user")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
         var registeredUser = getRegisteredUser("active");
+        Configuration.holdBrowserOpen = true;
+        $("[data-test-id=\"login\"] .input__control").setValue(registeredUser.getLogin());
+        $("[data-test-id=\"password\"] .input__control").setValue(registeredUser.getPassword());
+        $("[data-test-id=\"action-login\"]").click();
         // TODO: добавить логику теста, в рамках которого будет выполнена попытка входа в личный кабинет с учётными
         //  данными зарегистрированного активного пользователя, для заполнения полей формы используйте
         //  пользователя registeredUser
