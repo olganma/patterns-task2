@@ -33,6 +33,7 @@ public class DataGenerator {
                 .spec(requestSpec) // указываем, какую спецификацию используем
                 .body(user) // передаём в теле объект, который будет преобразован в JSON
                 .when() // "когда"
+                .when() // "когда"
                 .post("/api/system/users") // на какой путь относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
                 .statusCode(200); // код 200 OK
@@ -62,6 +63,7 @@ public class DataGenerator {
             // TODO: объявить переменную registeredUser и присвоить ей значение возвращённое getUser(status).
             // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)
             RegistrationDto registeredUser = getUser(status);
+           sendRequest(registeredUser);
             return registeredUser;
         }
     }
